@@ -72,27 +72,5 @@ Suggestions: SIP (₹10,000/month), insurance increase (₹400,000), spending cu
 Charts: Financial Overview, Income Breakdown, Portfolio Allocation.
 
 
-Chatbot response (e.g., “Current insurance is ₹100,000, but ₹500,000 is recommended...”).
 
 
-Database Check:sqlite3 financial_data.db "SELECT * FROM users"
-
-
-**
-Project Structure**
-
-financial-planner/
-├── financial_planner.py  # Main application code
-├── reports/              # Generated PDF reports
-├── financial_data.db     # SQLite database
-├── README.md             # Project documentation
-└── requirements.txt      # Dependencies
-
-Notes
-
-The application uses DistilRoBERTa for sentiment-based predictions. For generative output, consider integrating FinGPT (https://github.com/AI4Finance-Foundation/FinGPT).
-The HLV calculation is capped at 30 years with input validation.
-For production, deploy with Docker or a WSGI server (e.g., Gunicorn).
-
-Contact
-For issues or enhancements, contact the project maintainer.
