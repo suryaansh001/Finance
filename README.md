@@ -12,6 +12,7 @@ Detailed suggestions for SIPs, insurance, spending cuts, and goal-specific plans
 PDF report generation with financial charts.
 Chatbot for interactive financial advice.
 SQLite database for user data and chat history.
+
 **
 Prerequisites**
 
@@ -23,6 +24,7 @@ Python 3.8+
 Setup**
 
 Clone the repository:git clone https://github.com/suryaansh001/Finance/
+
 cd Finance
 
 
@@ -36,6 +38,7 @@ Access the app at http://127.0.0.1:8000.
 Usage
 
 Generate Financial Plan:
+
 Open the web interface.
 Fill in user details (e.g., name, age, salary, expenses, goals).
 Optionally upload a portfolio CSV (stock_name,quantity,purchase_price,current_price,sector) and bank statement PDF.
@@ -61,11 +64,15 @@ loans: 0
 portfolio_file: (CSV with ₹11,340 value, volatility 0.04)
 
 
+
 Portfolio CSV:stock_name,quantity,purchase_price,current_price,sector
+
 RELIANCE,5,2000,2268,Energy
 
+**
+Expected Output:**
 
-Expected Output:
+
 PDF report with:
 AI Predictions: Equity allocation (50%), insurance need (₹500,000), savings rate (₹20,000/month).
 Suggestions: SIP (₹10,000/month), insurance increase (₹400,000), spending cuts (₹6,000).
