@@ -1,5 +1,6 @@
-Financial Planner Project
-Overview
+**Financial Planner Project
+Overview**
+
 This project is a FastAPI-based web application for generating personalized financial plans. It processes user financial data, provides AI-driven predictions and suggestions, and generates PDF reports with charts and actionable advice. The application uses DistilRoBERTa for sentiment analysis and supports portfolio and bank statement analysis.
 Features
 
@@ -11,24 +12,23 @@ Detailed suggestions for SIPs, insurance, spending cuts, and goal-specific plans
 PDF report generation with financial charts.
 Chatbot for interactive financial advice.
 SQLite database for user data and chat history.
-
-Prerequisites
+**
+Prerequisites**
 
 Python 3.8+
-Dependencies:pip install fastapi uvicorn pydantic sqlite3 reportlab matplotlib numpy pandas pdfplumber transformers torch
+**Dependencies** : pip install fastapi uvicorn pydantic sqlite3 reportlab matplotlib numpy pandas pdfplumber transformers torch
 
 
+**
+Setup**
 
-Setup
-
-Clone the repository:git clone <repository-url>
-cd financial-planner
-
-
-Install dependencies:pip install -r requirements.txt
+Clone the repository:git clone https://github.com/suryaansh001/Finance/
+cd Finance
 
 
-Run the application:uvicorn financial_planner:app --reload
+Install dependencies
+
+Run the application:uvicorn main:app --reload
 
 
 Access the app at http://127.0.0.1:8000.
@@ -78,8 +78,9 @@ Chatbot response (e.g., “Current insurance is ₹100,000, but ₹500,000 is re
 Database Check:sqlite3 financial_data.db "SELECT * FROM users"
 
 
+**
+Project Structure**
 
-Project Structure
 financial-planner/
 ├── financial_planner.py  # Main application code
 ├── reports/              # Generated PDF reports
