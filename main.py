@@ -519,86 +519,123 @@ async def chat(message: str = Form(...)):
 async def get_form():
     html_content = """
     <!DOCTYPE html>
-    <html>
-    <head>
-        <title>FinPT - Financial Planner</title>
-        <style>
-            body { font-family: Arial, sans-serif; margin: 40px; }
-            .container { display: flex; }
-            .form-section { flex: 2; max-width: 600px; margin-right: 20px; }
-            .chat-section { flex: 1; max-width: 400px; }
-            label { display: block; margin: 10px 0 5px; }
-            input, textarea, button { width: 100%; padding: 8px; margin-bottom: 10px; box-sizing: border-box; }
-            button { background-color: #4CAF50; color: white; border: none; cursor: pointer; }
-            button:hover { background-color: #45a049; }
-            #chatbox { border: 1px solid #ccc; height: 300px; overflow-y: scroll; padding: 10px; margin-bottom: 10px; }
-            .message { margin: 5px 0; padding: 5px; border-radius: 5px; }
-            .user { text-align: right; background-color: #e3f2fd; color: blue; }
-            .bot { text-align: left; background-color: #e8f5e9; color: green; }
-            .note { font-size: 0.9em; color: #555; }
-            @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-            .message { animation: fadeIn 0.5s; }
-        </style>
-    </head>
-    <body>
-        <h1>FinPT - Financial Planner</h1>
-        <div class="container">
-            <div class="form-section">
-                <form action="/generate_plan" method="post" enctype="multipart/form-data">
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" required>
-                    <label for="age">Age:</label>
-                    <input type="number" id="age" name="age" min="18" max="100" required>
-                    <label for="salary">Monthly Salary (₹):</label>
-                    <input type="number" id="salary" name="salary" step="0.01" min="0" required>
-                    <label for="expenses">Monthly Expenses (₹):</label>
-                    <input type="number" id="expenses" name="expenses" step="0.01" min="0" required>
-                    <label for="investments">Current Investments (₹):</label>
-                    <input type="number" id="investments" name="investments" step="0.01" min="0" required>
-                    <div class="note">Enter manually or upload portfolio CSV to auto-fill.</div>
-                    <label for="goals">Financial Goals (comma-separated):</label>
-                    <textarea id="goals" name="goals" required></textarea>
-                    <label for="insurance">Current Insurance (₹):</label>
-                    <input type="number" id="insurance" name="insurance" step="0.01" min="0" required>
-                    <label for="loans">Current Loans (₹):</label>
-                    <input type="number" id="loans" name="loans" step="0.01" min="0" required>
-                    <label for="portfolio_file">Upload Portfolio (Optional, CSV: stock_name,quantity,purchase_price,current_price,sector):</label>
-                    <input type="file" id="portfolio_file" name="portfolio_file" accept=".csv">
-                    <label for="bank_statement">Upload Bank Statement (Optional, PDF):</label>
-                    <input type="file" id="bank_statement" name="bank_statement" accept=".pdf">
-                    <button type="submit">Generate Financial Plan</button>
-                </form>
-            </div>
-            <div class="chat-section">
-                <h2>Financial Assistant</h2>
-                <div id="chatbox"></div>
-                <input type="text" id="chat_input" placeholder="Enter your financial query">
-                <button onclick="sendMessage()">Send</button>
-            </div>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FinPT - Financial Planner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white font-sans p-8">
+    <h1 class="text-4xl font-bold mb-6 text-green-400">FinPT - Financial Planner</h1>
+    <div class="flex flex-col lg:flex-row gap-8">
+        <!-- Form Section -->
+        <div class="lg:w-2/3 space-y-4">
+            <form action="/generate_plan" method="post" enctype="multipart/form-data" class="space-y-4">
+                <div>
+                    <label class="block mb-1">Name:</label>
+                    <input type="text" name="name" required class="w-full p-2 bg-gray-800 border border-gray-600 rounded">
+                </div>
+                <div>
+                    <label class="block mb-1">Age:</label>
+                    <input type="number" name="age" min="18" max="100" required class="w-full p-2 bg-gray-800 border border-gray-600 rounded">
+                </div>
+                <div>
+                    <label class="block mb-1">Monthly Salary (₹):</label>
+                    <input type="number" name="salary" step="0.01" min="0" required class="w-full p-2 bg-gray-800 border border-gray-600 rounded">
+                </div>
+                <div>
+                    <label class="block mb-1">Monthly Expenses (₹):</label>
+                    <input type="number" name="expenses" step="0.01" min="0" required class="w-full p-2 bg-gray-800 border border-gray-600 rounded">
+                </div>
+                <div>
+                    <label class="block mb-1">Current Investments (₹):</label>
+                    <input type="number" name="investments" step="0.01" min="0" required class="w-full p-2 bg-gray-800 border border-gray-600 rounded">
+                </div>
+                <p class="text-sm text-gray-400">Enter manually or upload portfolio CSV to auto-fill.</p>
+                <div>
+                    <label class="block mb-1">Financial Goals (comma-separated):</label>
+                    <textarea name="goals" required class="w-full p-2 bg-gray-800 border border-gray-600 rounded"></textarea>
+                </div>
+                <div>
+                    <label class="block mb-1">Current Insurance (₹):</label>
+                    <input type="number" name="insurance" step="0.01" min="0" required class="w-full p-2 bg-gray-800 border border-gray-600 rounded">
+                </div>
+                <div>
+                    <label class="block mb-1">Current Loans (₹):</label>
+                    <input type="number" name="loans" step="0.01" min="0" required class="w-full p-2 bg-gray-800 border border-gray-600 rounded">
+                </div>
+                <div>
+                    <label class="block mb-1">Upload Portfolio (CSV):</label>
+                    <input type="file" name="portfolio_file" accept=".csv" class="w-full p-2 bg-gray-800 border border-gray-600 rounded">
+                </div>
+                <div>
+                    <label class="block mb-1">Upload Bank Statement (PDF):</label>
+                    <input type="file" name="bank_statement" accept=".pdf" class="w-full p-2 bg-gray-800 border border-gray-600 rounded">
+                </div>
+                <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-white p-2 rounded font-bold transition">Generate Financial Plan</button>
+            </form>
         </div>
-        <script>
-            async function sendMessage() {
-                const input = document.getElementById('chat_input');
-                const chatbox = document.getElementById('chatbox');
-                const message = input.value.trim();
-                if (!message) return;
-                chatbox.innerHTML += `<div class="message user">${message}</div>`;
-                chatbox.scrollTop = chatbox.scrollHeight;
-                input.value = '';
-                const response = await fetch('/chat', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: `message=${encodeURIComponent(message)}`
-                });
-                const data = await response.json();
-                chatbox.innerHTML += `<div class="message bot">${data.response}</div>`;
-                chatbox.scrollTop = chatbox.scrollHeight;
-            }
-            document.getElementById('chat_input').addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') sendMessage();
+
+        <!-- Chat Section -->
+        <div class="lg:w-1/3 space-y-4">
+            <h2 class="text-2xl font-semibold text-green-300">Financial Assistant</h2>
+            <div id="chatbox" class="h-96 bg-gray-800 border border-gray-600 p-4 rounded overflow-y-auto space-y-2"></div>
+            <input type="text" id="chat_input" placeholder="Enter your financial query" class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white">
+            <button onclick="sendMessage()" class="w-full bg-blue-500 hover:bg-blue-600 p-2 rounded text-white font-semibold transition">Send</button>
+        </div>
+    </div>
+
+    <script>
+        async function sendMessage() {
+            const input = document.getElementById('chat_input');
+            const chatbox = document.getElementById('chatbox');
+            const message = input.value.trim();
+            if (!message) return;
+
+            // Add user message
+            const userDiv = document.createElement("div");
+            userDiv.textContent = message;
+            userDiv.className = "message bg-blue-100 text-blue-800 text-right p-2 rounded fade-in self-end";
+            chatbox.appendChild(userDiv);
+
+            chatbox.scrollTop = chatbox.scrollHeight;
+            input.value = '';
+
+            const response = await fetch('/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `message=${encodeURIComponent(message)}`
             });
-        </script>
-    </body>
-    </html>
+
+            const data = await response.json();
+            const botDiv = document.createElement("div");
+            botDiv.textContent = data.response;
+            botDiv.className = "message bg-green-100 text-green-900 text-left p-2 rounded fade-in";
+            chatbox.appendChild(botDiv);
+
+            chatbox.scrollTop = chatbox.scrollHeight;
+        }
+
+        // Allow Enter key to send
+        document.getElementById('chat_input').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+
+        // Basic fade-in animation
+        const style = document.createElement('style');
+        style.innerHTML = `
+            .fade-in {
+                animation: fadeIn 0.5s ease-in-out;
+            }
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
+
     """
     return HTMLResponse(content=html_content)
